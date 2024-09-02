@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import base_url from './helper';
+import base_url from '../model/helper';
 
 @Injectable({
   providedIn: 'root'

@@ -13,16 +13,9 @@ export class NavbarComponent {
 
   constructor(public login: LoginService) { }
 
-  /* ngOnInit(): void {
-    this.isLoggedIn = this.login.isLoggedIn();
-    this.user = this.login.getUser();
-    this.login.loginStatusSubjec.asObservable().subscribe(
-      data => {
-        this.isLoggedIn = this.login.isLoggedIn();
-        this.user = this.login.getUser();
-      }
-    )
-  } */
+  ngOnInit(): void {
+
+  }
 
   public logout() {
     this.login.logout();

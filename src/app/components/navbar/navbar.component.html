@@ -13,10 +13,10 @@
         aria-label="Example icon-button with heart icon">
         Register
     </a>
-    <!-- <a *ngIf="isLoggedIn" (click)="logout()" style="margin-right: 50px" mat-icon-button
+    <a *ngIf="isLoggedIn" (click)="logout()" style="margin-right: 50px" mat-icon-button
         class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
         Logout
-    </a> -->
+    </a>
     <button *ngIf="isLoggedIn && user" mat-button style="margin-right: 10px" class="example-icon favorite-icon"
         aria-label="Example icon-button with heart icon">
         {{ user.username }}

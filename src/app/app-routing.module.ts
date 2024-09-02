@@ -4,8 +4,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './user/dashboard/dashboard.component';
-import { NormalGuard } from './services/normal.guard';
-import { AdminGuard } from './services/admin.guard';
+import { NormalGuard } from './guards/normal.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   {

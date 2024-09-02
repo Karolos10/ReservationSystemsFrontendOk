@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { reservationModel } from '../model/reservation-model';
-import base_url from './helper';
+import base_url from '../model/helper';
 
 @Injectable({
   providedIn: 'root'

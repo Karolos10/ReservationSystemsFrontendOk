@@ -1,5 +1,4 @@
-
-import { Component, numberAttribute, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ReservationServiceService } from '../../services/reservation-service.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { reservationModel } from '../../model/reservation-model';
@@ -33,7 +32,7 @@ export class DashboardComponent implements OnInit {
       startTime: new FormControl(''),
       details: new FormControl(''),
       status: new FormControl(''),
-      businessId: new FormControl('') // Agregar control para el ID del negocio
+      businessId: new FormControl('')
     });
 
     this.loadBusinesses();
@@ -50,17 +49,22 @@ export class DashboardComponent implements OnInit {
     const userId = this.loginService.getUserId();
     if (userId != null) {
       this.reservationService.getReservations(userId).subscribe(data => {
-        this.reservations = data;
+        this.reservations = data.map(reservation => {
+          const startTime = reservation.startTime ? new Date(`1970-01-01T${reservation.startTime}`) : null;
+          return new reservationModel({
+            ...reservation,
+            startTime
+          });
+        });
       });
     } else {
-      console.log("Error en el token");
+      console.log("Error in the token");
     }
   }
 
   save() {
     const formValue = this.formReservation.value;
 
-    // Validar que todos los campos necesarios están presentes
     const creationDateStr = formValue.creationDate;
     const modificationDateStr = formValue.modificationDate || creationDateStr;
     const startDateStr = formValue.startDate;
@@ -70,7 +74,7 @@ export class DashboardComponent implements OnInit {
     const userId = this.loginService.getUserId();
 
     if (!creationDateStr || !startDateStr || !endDateStr || !startTimeStr || !businessId) {
-      console.error('Datos del formulario incompletos');
+      console.error('Incomplete form data');
       return;
     }
 
@@ -98,12 +102,12 @@ export class DashboardComponent implements OnInit {
         if (res) {
           console.log('Reservation saved');
           console.log(formattedData);
-          this.loadReservations(); // Recargar reservas
+          this.loadReservations();
         }
       });
 
     } catch (error) {
-      console.error('Error al procesar las fechas y horas:', error);
+      console.error('Error processing dates and times:', error);
     }
   }
 
@@ -119,7 +123,7 @@ export class DashboardComponent implements OnInit {
       const businessId = formValue.businessId;
 
       if (!creationDateStr || !startDateStr || !endDateStr || !startTimeStr || !businessId) {
-        console.error('Datos del formulario incompletos');
+        console.error('Incomplete form data');
         return;
       }
 
@@ -146,12 +150,12 @@ export class DashboardComponent implements OnInit {
           if (res) {
             console.log('Reservation updated');
             console.log(formattedData);
-            this.loadReservations(); // Recargar reservas
+            this.loadReservations();
           }
         });
 
       } catch (error) {
-        console.error('Error al procesar las fechas y horas:', error);
+        console.error('Error processing dates and times:', error);
       }
     }
   }
@@ -162,21 +166,29 @@ export class DashboardComponent implements OnInit {
       ...reservation,
       businessId: reservation.business?.businessId
     });
-    // Mostrar el modal para edición
     const modal = new bootstrap.Modal(document.getElementById('exampleModal') as Element);
     modal.show();
   }
 
+  isDeleting: boolean = false;
+
   deleteReservation(id: number) {
     if (confirm('Are you sure you want to delete this reservation?')) {
+      this.isDeleting = true;
+
       const data = {
         reservationId: id
-      }
+      };
+
       this.reservationService.cancelarReservations(data).subscribe(res => {
         if (res) {
+          this.reservations = this.reservations.filter(reservation => reservation.reservationId !== id);
           console.log('Reservation deleted');
-          this.loadReservations(); // Recargar reservas
         }
+        this.isDeleting = false;
+      }, error => {
+        console.error('Error deleting reservation:', error);
+        this.isDeleting = false;
       });
     }
   }

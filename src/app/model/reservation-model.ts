@@ -1,5 +1,4 @@
-import { Business } from "./Busines";
-
+import { Business } from './Busines';
 
 export class reservationModel {
     reservationId: number = 0;
@@ -7,8 +6,12 @@ export class reservationModel {
     modificationDate?: Date = new Date();
     startDate: Date = new Date();
     endDate: Date = new Date();
-    startTime: Date = new Date();
+    startTime: Date | null = null; // Permitir null aquí
     details: string = '';
-    status: boolean = false;
+    status: number = 0;
     business?: Business;
+
+    constructor(init?: Partial<reservationModel>) {
+        Object.assign(this, init);
+    }
 }

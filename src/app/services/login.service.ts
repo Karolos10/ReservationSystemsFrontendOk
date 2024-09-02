@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import base_url from './helper';
+import base_url from '../model/helper';
 import { jwtDecode } from 'jwt-decode';
 import { JwtPayload } from '../model/JwtPayload';
 
