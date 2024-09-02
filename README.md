@@ -1,27 +1,39 @@
-# ReservationSytems
+Reservation System Frontend
+Este es un proyecto frontend para un sistema de reservas desarrollado con Angular. El proyecto permite gestionar reservas, autenticación de usuarios y administración de usuarios a través de un panel de administración.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.1.
+Contenidos
+Descripción del Proyecto
+Requisitos
+Instalación
+Ejecución del Proyecto
+Estructura del Proyecto
+Cómo Contribuir
+Licencia
+Descripción del Proyecto
+Este proyecto permite a los usuarios autenticarse, gestionar sus reservas y a los administradores gestionar usuarios y reservas. El sistema incluye:
 
-## Development server
+Inicio de sesión: Autenticación de usuarios con roles (NORMAL y ADMIN).
+(Solo esta desarrollado para un usuario normal, no se implemento para admin)
+Dashboard: Interfaz para gestionar reservas y consultar negocios.
+Registro: Opción para que los nuevos usuarios se registren en el sistema.
+Guardias de ruta: Protegen las rutas basadas en los roles de usuario.
+Interceptors: Manejan la autenticación en las solicitudes HTTP.
+Requisitos
+Node.js (v14.x o superior)
+npm (v6.x o superior)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Instalación
+Clona el repositorio:
 
-## Code scaffolding
+git clone <url-del-repositorio>
+Accede al directorio del proyecto:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+cd nombre-del-proyecto
+Instala las dependencias:
 
-## Build
+npm install
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Ejecución del Proyecto
+Para ejecutar el proyecto en modo desarrollo, usa el siguiente comando:
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+npm run start
