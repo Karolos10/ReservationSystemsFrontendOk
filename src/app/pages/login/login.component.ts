@@ -15,25 +15,21 @@ export class LoginComponent implements OnInit {
     "password": ""
   }
 
+  isLoggedIn = false;
+  user: any;
+
   constructor(private snack: MatSnackBar, private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   formSubmit() {
-    if (this.loginData.username.trim() == "" || this.loginData.password.trim() == null) {
+
+    if (this.loginData.username.trim() == "" || this.loginData.username.trim() == null
+      || this.loginData.password.trim() == "" || this.loginData.password.trim() == null) {
       this.snack.open("Username or Password is empty", "OK", {
-        duration: 3000
+        duration: 30000
       })
-
-      return;
-    }
-
-    if (this.loginData.password.trim() == '' || this.loginData.password.trim() == null) {
-      this.snack.open('La contraseña es requerida !!', 'Aceptar', {
-        duration: 3000
-      })
-      return;
     }
 
     this.loginService.login(this.loginData).subscribe(
@@ -55,7 +51,7 @@ export class LoginComponent implements OnInit {
         }
       }, (error) => {
         console.log(error);
-        this.snack.open('Detalles inválidos , vuelva a intentar !!', 'Aceptar', {
+        this.snack.open('Invalid details, try again !!', 'OK', {
           duration: 3000
         })
       }

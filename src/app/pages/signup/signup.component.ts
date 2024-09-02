@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { ServiceService } from '../../services/service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
+import { DefaultUser, User } from '../../model/user.model';
 
 @Component({
   selector: 'app-signup',
@@ -10,7 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class SignupComponent implements OnInit {
 
-  public user = {
+  /* public user = {
     names: '',
     lastName: '',
     phone: '',
@@ -18,10 +19,14 @@ export class SignupComponent implements OnInit {
     email: '',
     password: ''
   }
+ */
+
 
   ngOnChanges(cambio: SimpleChanges) {
     console.log(cambio);
   }
+
+  public user: User = new DefaultUser();
 
   constructor(private userService: ServiceService, private snackBar: MatSnackBar) { }
 
@@ -31,7 +36,7 @@ export class SignupComponent implements OnInit {
 
   }
 
-  formSubmit() {
+  formSubmit(): void {
     console.log(this.user);
     if (this.user.username == '' || this.user.username == null) {
       this.snackBar.open('username is required', 'Accept', {

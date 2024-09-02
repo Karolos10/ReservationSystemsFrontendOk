@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -11,15 +12,24 @@ export class NavbarComponent {
   isLoggedIn = false;
   user: any = null;
 
-  constructor(public login: LoginService) { }
+  constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
 
+    this.checkLoginStatus();
+    this.user = this.loginService.getToken() ? this.loginService.decryptToken(this.loginService.getToken()!).username : null;
+
   }
 
-  public logout() {
-    this.login.logout();
-    window.location.reload();
+  logout() {
+    this.loginService.logout();
+    this.checkLoginStatus();
+    this.router.navigate(['/']);
+  }
+
+  checkLoginStatus() {
+    this.isLoggedIn = this.loginService.isLoggedIn();
+    this.user = this.isLoggedIn ? this.loginService.decryptToken(this.loginService.getToken()!).username : null;
   }
 
 }
